@@ -1,0 +1,6 @@
+dev
+prod
+node_modules
+package-lock.json
+yarn.lock
+database.json

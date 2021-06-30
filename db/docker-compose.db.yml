@@ -1,0 +1,38 @@
+# Use postgres/example user/password credentials
+version: "3.6"
+
+services:
+
+  bills-db:
+    container_name: bills-db-dev
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: db
+      PGDATA: /data/pgdata
+    volumes:
+      - ./dev:/data/pgdata
+    ports:
+      - "5432:5432"
+    command:
+      [
+        "postgres",
+        "-c",
+        "shared_preload_libraries=pgaudit",
+        "-c",
+        "logging_collector=on",
+        "-c",
+        "log_statement=all",
+        "-c",
+        "log_directory=./log",
+      ]
+
+  bills-redis:
+    image: 'bitnami/redis:latest'
+    environment: 
+      REDIS_PASSWORD: 12345
+    ports: 
+      - "6379:6379"
