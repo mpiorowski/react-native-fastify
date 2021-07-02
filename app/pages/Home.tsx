@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, TextInput, View } from "react-native";
 
 export function HomeScreen() {
@@ -10,16 +10,7 @@ export function HomeScreen() {
     await AsyncStorage.setItem("username", username);
     navigation.navigate("Questions");
   };
-
-  useEffect(() => {
-    const getUsername = async () => {
-      const response = await AsyncStorage.getItem("username");
-      if (response) {
-        navigation.navigate("Questions");
-      }
-    };
-    getUsername();
-  }, []);
+  
   return (
     <View
       style={{

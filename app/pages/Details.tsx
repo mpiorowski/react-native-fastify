@@ -1,27 +1,10 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import React from "react";
 import { Question } from "./Question";
 
 const Tab = createBottomTabNavigator();
 
 export function DetailsScreen() {
-  const navigation = useNavigation();
-
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
-      const response = await AsyncStorage.getItem("username");
-      response && setUsername(response);
-    });
-
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-  }, [navigation]);
-
   return (
     <Tab.Navigator
       tabBarOptions={{

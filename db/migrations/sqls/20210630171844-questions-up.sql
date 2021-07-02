@@ -15,7 +15,7 @@ CREATE TABLE questions (
 
 CREATE TABLE answers (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-  username text,
+  username text unique,
   q1 numeric,
   q2 numeric,
   q3 numeric,

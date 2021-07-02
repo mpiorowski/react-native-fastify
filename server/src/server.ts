@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import mercurius from "mercurius";
+import { loaders } from "./loaders";
 import { resolvers } from "./resolvers";
 import { schema } from "./schema";
 dotenv.config();
@@ -28,6 +29,7 @@ app.setErrorHandler(function (error, _request, reply) {
 void app.register(mercurius, {
   schema,
   resolvers,
+  loaders,
   graphiql: process.env["NODE_ENV"] === "development" ? true : false,
   // context: buildContext,
 });

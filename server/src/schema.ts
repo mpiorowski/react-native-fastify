@@ -1,6 +1,11 @@
 export const schema = `
   type Query {
-    questions: [Question]
+    questions(username: String): [Question]
+    question(username: String, number: Int): Question
+  }
+
+  type Mutation {
+    addAnswer(number: Int, answer: Int, username: String): Boolean
   }
 
   type Question {
@@ -17,6 +22,7 @@ export const schema = `
     answer3: String
     answer4: String
     correct: Int
+    answered(username: String): Boolean
     date: String
   }
 

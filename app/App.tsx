@@ -10,30 +10,49 @@ import { HomeScreen } from "./pages/Home";
 const Stack = createStackNavigator();
 const client = createClient({
   url: `http://192.168.1.21:4000/graphql`,
-  requestPolicy: "cache-and-network",
+  requestPolicy: "network-only",
 });
 
 function App() {
+  const [initialRouter, setInitialRouter] = useState("");
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const getUsername = async () => {
+      const response = await AsyncStorage.getItem("username");
+      if (response) {
+        setInitialRouter("Questions");
+      } else {
+        setInitialRouter("Home");
+      }
+      setLoading(false);
+    };
+    getUsername();
+  }, []);
 
   return (
     <Provider value={client}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerLeft: () => null }}>
-          <Stack.Screen
-            name="Home"
-            options={{
-              title: "Witamy Was serdzecznie",
-            }}
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            name="Questions"
-            options={{
-              title: "Pytania",
-            }}
-            component={DetailsScreen}
-          />
-        </Stack.Navigator>
+        {!loading && (
+          <Stack.Navigator
+            screenOptions={{ headerLeft: () => null }}
+            initialRouteName={initialRouter}
+          >
+            <Stack.Screen
+              name="Home"
+              options={{
+                title: "Witamy Was serdzecznie",
+              }}
+              component={HomeScreen}
+            />
+            <Stack.Screen
+              name="Questions"
+              options={{
+                title: "Pytania",
+              }}
+              component={DetailsScreen}
+            />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     </Provider>
   );
