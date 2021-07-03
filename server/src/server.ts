@@ -38,8 +38,8 @@ void app.register(mercurius, {
 const start = async () => {
   try {
     // fastify server startup
-    await app.listen(4000, "0.0.0.0");
-    app.log.info(`server listening on 4000`);
+    await app.listen(parseInt(process.env["PORT"] as string), "0.0.0.0");
+    app.log.info(`server listening on ${process.env["PORT"] as string}`);
   } catch (err) {
     app.log.error(err);
     process.exit(1);
