@@ -17,18 +17,8 @@ services:
       - ./dev:/data/pgdata
     ports:
       - "5432:5432"
-    command:
-      [
-        "postgres",
-        "-c",
-        "shared_preload_libraries=pgaudit",
-        "-c",
-        "logging_collector=on",
-        "-c",
-        "log_statement=all",
-        "-c",
-        "log_directory=./log",
-      ]
+  command: sh -c "echo 'starting db' && yarn run migrate"
+
 
   bills-redis:
     image: 'bitnami/redis:latest'

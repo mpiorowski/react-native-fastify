@@ -10,7 +10,3 @@ sudo chmod 777 -R prod
 
 # 3. Run docker compose
 docker-compose -f ../prod/docker-compose.prod.yml up -d --build
-
-# 4. Run migrations
-npm install
-npm run migrate

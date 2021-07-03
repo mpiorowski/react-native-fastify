@@ -29,6 +29,15 @@ services:
       - ../db/prod:/data/pgdata
     restart: on-failure:3
 
+  migration:
+    working_dir: /migration
+    volumes: 
+      - ../db:/migration
+    image: node:16.2-alpine
+    command: sh -c "echo 'starting migration' && npm run migrate"
+    depends_on: 
+      - db
+
   server:
     container_name: server-prod
     build:
