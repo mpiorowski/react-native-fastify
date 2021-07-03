@@ -12,7 +12,7 @@ const app = Fastify({
   logger: true,
 });
 app.register(require("fastify-cors"), {
-  // put your options here
+  origin: "*",
 });
 
 // error handler
