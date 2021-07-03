@@ -21,6 +21,6 @@
   },
   "scripts": {
     "start": "ts-node-dev --files src/server.ts",
-    "prod": "node build/server/src/server.js"
+    "prod": "node build/server.js"
   }
 }
