@@ -1,16 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { Button, TextInput, View } from "react-native";
+import { AuthContext } from "../App";
 
 export function HomeScreen() {
-  const navigation = useNavigation();
+  const auth = useContext(AuthContext);
   const [username, setUsername] = React.useState("");
   const onPress = async () => {
     await AsyncStorage.setItem("username", username);
-    navigation.navigate("Questions");
+    auth?.setIsUsername(true);
   };
-  
+
   return (
     <View
       style={{
