@@ -12,7 +12,7 @@ import { HomeScreen } from "./pages/Home";
 
 const Stack = createStackNavigator();
 const client = createClient({
-  url: `http://192.168.1.21:4444/graphql`,
+  url: `http://146.59.13.247:4444/graphql`,
   requestPolicy: "network-only",
   fetchOptions: {
     mode: "cors",
