@@ -34,7 +34,7 @@ services:
     volumes: 
       - ../db:/migration
     image: node:16.2-alpine
-    command: sh -c "echo 'starting migration' && npm run migrate"
+    command: sh -c "echo 'starting migration' && npm install && npm run migrate"
     depends_on: 
       - db
 
