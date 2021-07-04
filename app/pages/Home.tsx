@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext } from "react";
 import { Button, TextInput, View } from "react-native";
-import { AuthContext } from "../App";
+import { AuthContext } from "../context";
 
 export function HomeScreen() {
   const auth = useContext(AuthContext);

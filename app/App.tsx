@@ -5,23 +5,19 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { createClient, Provider } from "urql";
+import { AuthContext } from "./context";
 import { CodeScreen } from "./pages/Code";
 import { DetailsScreen } from "./pages/Details";
 import { HomeScreen } from "./pages/Home";
 
 const Stack = createStackNavigator();
 const client = createClient({
-  url: `http://localhost:4444/graphql`,
+  url: `http://192.168.1.21:4444/graphql`,
   requestPolicy: "network-only",
   fetchOptions: {
     mode: "cors",
   },
 });
-
-export const AuthContext = React.createContext<{
-  setIsUsername: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsCode: React.Dispatch<React.SetStateAction<boolean>>;
-} | null>(null);
 
 function App() {
   const [loading, setLoading] = useState(true);

@@ -3,10 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Button, RefreshControl, ScrollView, Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
-import {
-  useAnswer,
-  useFindQuestion,
-} from "./questions.graphql";
+import { useAnswer, useFindQuestion } from "./questions.graphql";
 
 const wait = (timeout: any) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -20,7 +17,7 @@ export const Question: React.FC = () => {
 
   const [username, setUsername] = useState("");
 
-  const { data, reexecuteQuery } = useFindQuestion(username, number);
+  const { data, reexecuteQuery, fetching } = useFindQuestion(username, number);
   const question = data?.question || {};
 
   useEffect(() => {
@@ -53,6 +50,10 @@ export const Question: React.FC = () => {
       console.log(error);
     }
   };
+
+  if (fetching || !question.question) {
+    return <View></View>;
+  }
 
   return (
     <View>
@@ -145,7 +146,9 @@ export const Question: React.FC = () => {
               />
             </View>
           </RadioButton.Group>
-          <Button title="Zapisz" onPress={handleSave} />
+          <View style={{ marginTop: 20 }}>
+            <Button title="Zapisz" onPress={handleSave} />
+          </View>
         </ScrollView>
       )}
       {/* <Button title="wroc" onPress={() => navigation.navigate("Home")} /> */}

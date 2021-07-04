@@ -45,10 +45,10 @@ insert into questions (question,
   answer4,
   correct,
   date) values (
-    'W których roku urodził się Mateusz', 1, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+    'Pytanie 1', 1, '1992', '1993', '1994', '1995', 1, '2021-01-01'
   );
 
-  insert into questions (question,
+insert into questions (question,
   number,
   answer1,
   answer2,
@@ -56,5 +56,75 @@ insert into questions (question,
   answer4,
   correct,
   date) values (
-    'W których roku urodziła się Agata', 2, '1768', 'Nikt tego nie wie', 'Ona żyje wiecznie', 'A kto ot Agata?', 1, '2021-01-01'
+    'Pytanie 2', 2, '1992', '1993', '1994', '1995', 1, '2021-01-01'
   );
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 3', 3, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 4', 4, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 5', 5, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 6', 6, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 7', 7, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
+
+insert into questions (question,
+  number,
+  answer1,
+  answer2,
+  answer3,
+  answer4,
+  correct,
+  date) values (
+    'Pytanie 8', 8, '1992', '1993', '1994', '1995', 1, '2021-01-01'
+  );
+
