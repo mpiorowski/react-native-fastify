@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { db } from "../helpers/db.helper";
 
 type Question = {
@@ -29,13 +28,7 @@ export async function getAllQuestions(): Promise<Question[]> {
 
 export async function getQuestion(data: { number: number }): Promise<Question> {
   try {
-    let number = data.number;
-    if (dayjs().get("date") < 5) {
-      number = number;
-    } else if (dayjs().get("date") < 6) {
-      number = number + 1;
-    }
-    const queryText = `select * from questions where date < now() and number= ${number}`;
+    const queryText = `select * from questions where date < now() and number= ${data.number}`;
     const response = await db<Question>(queryText);
     if (!response[0]) {
       throw "Question not exists";
@@ -53,13 +46,7 @@ export async function addAnswer(data: {
   username: string;
 }): Promise<boolean> {
   try {
-    let number = data.number;
-    if (dayjs().get("date") < 5) {
-      number = number;
-    } else if (dayjs().get("date") < 6) {
-      number = number + 1;
-    }
-    const queryText = `INSERT INTO answers (username, "q${String(number)}")
+    const queryText = `INSERT INTO answers (username, "q${String(data.number)}")
     VALUES('${data.username}', ${data.answer}) 
     ON CONFLICT (username) 
     DO 

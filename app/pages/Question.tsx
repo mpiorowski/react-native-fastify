@@ -1,9 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRoute } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Button, RefreshControl, ScrollView, Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 import { useAnswer, useFindQuestion } from "./questions.graphql";
+import dayjs from "dayjs";
 
 const wait = (timeout: any) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -11,15 +12,18 @@ const wait = (timeout: any) => {
 export const Question: React.FC = () => {
   const [value, setValue] = React.useState("1");
   const router = useRoute();
-  const { number } = router.params as { number: number };
+  let { number } = router.params as { number: number };
+  if (dayjs().get("date") < 6) {
+    number = number;
+  } else if (dayjs().get("date") < 11) {
+    number = number + 4;
+  }
 
   const [refreshing, setRefreshing] = React.useState(false);
 
   const [username, setUsername] = useState("");
-
   const { data, reexecuteQuery, fetching } = useFindQuestion(username, number);
   const question = data?.question || {};
-
   useEffect(() => {
     AsyncStorage.getItem("username").then((response) => {
       if (response != "" && response) {
@@ -27,6 +31,12 @@ export const Question: React.FC = () => {
       }
     });
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      reexecuteQuery();
+    }, [])
+  );
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -37,7 +47,6 @@ export const Question: React.FC = () => {
   const addAnswer = useAnswer();
   const handleSave = async () => {
     try {
-      const username = await AsyncStorage.getItem("username");
       if (username) {
         await addAnswer.mutate({
           number,
@@ -51,7 +60,7 @@ export const Question: React.FC = () => {
     }
   };
 
-  if (fetching || !question.question) {
+  if (fetching) {
     return <View></View>;
   }
 
