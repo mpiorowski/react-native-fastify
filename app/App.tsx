@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const client = createClient({
   // url: `http://192.168.1.21:4444/graphql`,
   url: `http://51.83.185.45:4444/graphql`,
-  // requestPolicy: "network-only",
+  requestPolicy: "cache-and-network",
   fetchOptions: {
     mode: "cors",
   },
